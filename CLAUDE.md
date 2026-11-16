@@ -132,8 +132,11 @@ GPUs, phones included, run these smoothly.
 ## The plan
 
 1. **Player** (started). `index.html?stream=1&cycle=120` already cycles the playlist with a fade.
-   Still to do: preload the next scene before fading, shuffle, pick up new entries in
-   `scenes/index.json` without a reload, and a better transition than a fade to black.
+   It re-reads `scenes/index.json` before every cycle, so added and removed scenes are picked up
+   without a reload, and it skips a scene that fails to load or build. Still to do: preload the
+   next scene before fading, shuffle, a better transition than a fade to black, and a version per
+   playlist entry so an edited scene replaces the copy a long-running page has already imported.
+   This repo is the static site (GitHub Pages from `main`); the streaming machine only opens its URL.
 2. **Generator.** A script that calls the Claude API with this file's contract and lessons,
    `engine/kit.js`, one existing scene as the worked example, and a theme, and writes
    `scenes/<id>.js`. Themes from a seed list at first; chat votes later.

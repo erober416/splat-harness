@@ -22,6 +22,11 @@ Then open http://localhost:8000.
 
 Drag to move the camera, tap to poke the scene.
 
+The repo is also the site: GitHub Pages serves `main` as it is, with no build, at
+https://erober416.github.io/splat-harness/. When cycling, the player re-reads `scenes/index.json`
+before each change, so pushing a new scene and its playlist entry is all it takes to add one to a
+player that is already running. A scene that fails to load is skipped.
+
 ## Layout
 
     index.html, player.js     the player: loads scenes, HUD, cycling
