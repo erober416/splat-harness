@@ -1,6 +1,6 @@
 # splat-harness
 
-Pixel-art gaussian splat dioramas. Two hand-built scenes exist (`night-pond`, `moon-roof-cat`).
+Pixel-art gaussian splat dioramas. Three hand-built scenes exist (`night-pond`, `moon-roof-cat`, `desert-campfire`).
 The goal is a harness that generates new scenes with a model, gates them for quality, and streams
 them around the clock, changing every couple of minutes.
 
