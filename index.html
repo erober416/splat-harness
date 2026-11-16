@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splat Harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* layout: full-bleed pixel canvas; title plate top-left; one row of chunky toggles pinned bottom.
+     The six colour tokens are overwritten from each scene's meta.ui. */
+  --void:#05060c; --ink:#0b0d1a; --edge:#1a2b45; --title:#c9e77a; --hint:#ffc44d; --text:#a9afc0;
+  --display:"Silkscreen","Courier New",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--void);color:var(--text);overflow:hidden;font-family:var(--display)}
+#stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:var(--void)}
+canvas{display:block;image-rendering:pixelated;image-rendering:crisp-edges;touch-action:none;cursor:grab;outline:none;transition:opacity .6s linear}
+canvas:active{cursor:grabbing}
+canvas.out{opacity:0}
+.plate{position:fixed;top:16px;left:16px;right:16px;pointer-events:none;display:flex;flex-direction:column;gap:6px;max-width:34ch}
+.plate h1{margin:0;font:700 20px/1 var(--display);letter-spacing:.04em;color:var(--title);text-shadow:2px 2px 0 var(--ink);text-wrap:balance}
+.plate p{margin:0;font:400 11px/1.45 var(--display);color:var(--text);text-shadow:1px 1px 0 var(--ink);font-variant-numeric:tabular-nums}
+.plate .hint{color:var(--hint)}
+.bar{position:fixed;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:8px}
+.bar button{font:400 11px/1 var(--display);color:var(--text);background:var(--ink);border:2px solid var(--edge);border-radius:0;padding:9px 10px 8px;cursor:pointer;box-shadow:3px 3px 0 var(--void);display:flex;gap:8px;align-items:baseline}
+.bar button b{font-weight:700;color:var(--title)}
+.bar button:hover{border-color:var(--hint)}
+.bar button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--void)}
+.bar button:focus-visible,canvas:focus-visible{outline:2px solid var(--hint);outline-offset:2px}
+#msg{position:fixed;inset:0;display:grid;place-items:center;padding:24px;margin:0;text-align:center;font:400 13px/1.5 var(--display);color:var(--hint)}
+#msg[hidden]{display:none}
+body.stream .plate,body.stream .bar{display:none}
+body.stream canvas{cursor:none}
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="c" tabindex="0" role="img" aria-label="Pixel-art gaussian splat scene"></canvas></div>
+<header class="plate">
+  <h1 id="title">Splat Harness</h1>
+  <p id="stat">Loading scene</p>
+  <p class="hint" id="hint"></p>
+</header>
+<nav class="bar" aria-label="Scene controls">
+  <button id="bScene" type="button">Scene <b>Next</b></button>
+  <button id="bPal" type="button">Palette <b></b></button>
+  <button id="bPx" type="button">Pixels <b></b></button>
+  <button id="bMotion" type="button" aria-pressed="true">Motion <b></b></button>
+</nav>
+<p id="msg" hidden></p>
+<script type="module" src="player.js"></script>
+</body>
+</html>
